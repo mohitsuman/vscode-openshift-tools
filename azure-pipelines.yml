@@ -1,0 +1,76 @@
+# Node.js with webpack
+# Build a Node.js project using the webpack CLI.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+jobs:
+  - job: Windows
+    pool:
+      name: Hosted VS2017
+      demands: npm
+    steps:
+      - task: NodeTool@0
+        displayName: 'Use Node 10.x'
+        inputs:
+          versionSpec: 10.16.0
+      - task: Npm@1
+        displayName: 'Install dependencies'
+        inputs:
+          verbose: false
+      - script: |
+          npm install -g typescript --save-dev
+          npm install
+          npm run vscode:prepublish
+        displayName: 'npm install, run prepublish'
+      - script: |
+          npm test --silent
+          codecov -f coverage/coverage-final.json
+        displayName: 'Run tests and coverage'
+  - job: macOS
+    pool:
+      name: Hosted macOS
+      demands: npm
+    steps:
+      - task: NodeTool@0
+        displayName: 'Use Node 10.x'
+        inputs:
+          versionSpec: 10.16.0
+      - task: Npm@1
+        displayName: 'Install dependencies'
+        inputs:
+          verbose: false
+      - script: |
+          npm install -g typescript --save-dev
+          npm install
+          npm run vscode:prepublish
+        displayName: 'npm install, run prepublish'
+      - script: |
+          npm test --silent
+          codecov -f coverage/coverage-final.json
+        displayName: 'Run tests and coverage'
+  - job: Linux
+    pool:
+    vmImage: 'ubuntu-latest'
+    steps:
+      - task: NodeTool@0
+        displayName: 'Use Node 10.x'
+        inputs:
+          versionSpec: 10.16.0
+      - task: Npm@1
+        displayName: 'Install dependencies'
+        inputs:
+          verbose: false
+      - script: |
+          if [ $TRAVIS_OS_NAME == "linux" ]; then
+              export CXX="g++-4.9" CC="gcc-4.9" DISPLAY=:99.0;
+              sh -e /etc/init.d/xvfb start;
+              sleep 3;
+            fi
+          npm install -g typescript
+        displayName: 'Before Install'
+      - script: |
+          npm test --silent
+          codecov -f coverage/coverage-final.json
+        displayName: 'Run tests and coverage'
+        env:
+          DISPLAY: :10
