@@ -50,7 +50,7 @@ jobs:
         displayName: 'Run tests and coverage'
   - job: Linux
     pool:
-    vmImage: 'ubuntu-latest'
+      name: 'ubuntu-latest'
     steps:
       - task: NodeTool@0
         displayName: 'Use Node 10.x'
