@@ -24,7 +24,7 @@ jobs:
         displayName: 'npm install, run prepublish'
       - script: |
           npm test --silent
-          codecov -f coverage/coverage-final.json
+          npm run coverage:upload
         displayName: 'Run tests and coverage'
   - job: macOS
     pool:
@@ -46,7 +46,7 @@ jobs:
           npm test --silent
         displayName: 'Run tests'
       - script: |
-          codecov -f coverage/coverage-final.json
+          npm run coverage:upload
         displayName: 'Run code coverage'
   - job: Linux
     pool:
@@ -67,5 +67,5 @@ jobs:
           npm test --silent
         displayName: 'Run tests'
       - script: |
-          codecov -f coverage/coverage-final.json
+          npm run coverage:upload
         displayName: 'Run code coverage'
