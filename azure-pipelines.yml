@@ -50,7 +50,7 @@ jobs:
         displayName: 'Run tests and coverage'
   - job: Linux
     pool:
-      name: 'ubuntu-latest'
+      name: Hosted Ubuntu 1604
     steps:
       - task: NodeTool@0
         displayName: 'Use Node 10.x'
