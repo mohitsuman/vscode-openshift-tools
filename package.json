@@ -79,7 +79,8 @@
     "onCommand:openshift.service.delete",
     "onCommand:openshift.service.describe",
     "onCommand:openshift.service.describe.palette",
-    "onCommand:openshift.component.folder.create"
+    "onCommand:openshift.component.folder.create",
+    "onCommand:openshift.issueTracker"
   ],
   "main": "./out/src/extension",
   "contributes": {
@@ -103,7 +104,10 @@
         "command": "openshift.explorer.login",
         "title": "Log in to cluster",
         "category": "OpenShift",
-        "icon": "images/title/login.png"
+        "icon": {
+          "dark": "images/title/dark/icon-login.svg",
+          "light": "images/title/light/icon-login.svg"
+        }
       },
       {
         "command": "openshift.explorer.login.tokenLogin",
@@ -119,7 +123,19 @@
         "command": "openshift.explorer.refresh",
         "title": "Refresh View",
         "category": "OpenShift",
-        "icon": "images/title/refresh.png"
+        "icon": {
+          "dark": "images/title/dark/icon-refresh.svg",
+          "light": "images/title/light/icon-refresh.svg"
+        }
+      },
+      {
+        "command": "openshift.issueTracker",
+        "title": "Report Extension Issue on GitHub",
+        "category": "OpenShift",
+        "icon": {
+          "dark": "images/title/dark/icon-issue.svg",
+          "light": "images/title/light/icon-issue.svg"
+        }
       },
       {
         "command": "openshift.project.create",
@@ -485,6 +501,11 @@
         },
         {
           "command": "openshift.explorer.refresh",
+          "when": "view == openshiftProjectExplorer",
+          "group": "navigation"
+        },
+        {
+          "command": "openshift.issueTracker",
           "when": "view == openshiftProjectExplorer",
           "group": "navigation"
         }
