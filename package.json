@@ -80,7 +80,7 @@
     "onCommand:openshift.service.describe",
     "onCommand:openshift.service.describe.palette",
     "onCommand:openshift.component.folder.create",
-    "onCommand:openshift.issueTracker"
+    "onCommand:openshift.issueTracker",
     "onCommand:clusters.openshift.openProjectConsole",
     "onCommand:clusters.openshift.useProject"
   ],
